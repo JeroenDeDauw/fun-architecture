@@ -20,12 +20,41 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+
+		<style>
+			.shadow { text-shadow: 1px 1px 3px #000, 4px 4px 5px darkblue; }
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<!-- TODO: such background! IvoryTower.jpg? -->
+				<section data-background="img/wall2.jpg" data-transition="linear">
+
+					<p class="shadow" style="font-size: larger">
+						Real world implementation of
+					</p>
+
+					<h2><span class="shadow">The Clean Architecture</span></h2>
+
+					<p class="shadow">
+						<br />
+						Created by
+						<a href="https://entropywins.wtf/">Jeroen De Dauw</a>
+						for <a href="https://wikimedia.de/">Wikimedia Deutschland</a>
+						<br />
+						Licensed <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+					</p>
+
+					<p class="shadow"><br /><a href="">
+						such link be here
+					</a></p>
+				</section>
+
+
+				<section>
+
+				</section>
 			</div>
 		</div>
 
