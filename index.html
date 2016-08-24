@@ -102,10 +102,10 @@
 					<pre style="font-size: x-large"><code class="PHP">
 $app->get(
     '/launch-nukes',
-    function( Application $app, Request $request ) use ( $factory ) {
+    function( Request $httpRequest ) use ( $factory ) {
         $request = new LaunchNukesRequest(
-            $request->query->get( 'password' ),
-            $request->query->get( 'number' )
+            $httpRequest->query->get( 'password' ),
+            $httpRequest->query->get( 'number' )
         );
 
         $r = $factory->newLaunchNukesUseCase()->launchNukes( $request );
@@ -117,6 +117,8 @@ $app->get(
 );
                             </code></pre>
 				</section>
+
+				<section>
 					<!-- TODO: screenshots of new app before reorganization -->
 				</section>
 
