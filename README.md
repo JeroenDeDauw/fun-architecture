@@ -27,4 +27,4 @@ language agnostic, and can therefore easily be applied in other OOP languages.
 * Bounded Contexts
 
 
-You can view [the slides](https://wmde.github.io/fun-architecture/).
+You can view [the slides](https://entropywins.wtf/slides/fun-architecture).
