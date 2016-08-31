@@ -52,17 +52,20 @@
 
 
 				<section>
-					<p class="slide-title">The application</p>
-					<!-- TODO: such screenshots -->
+					<img src="img/fun-form.jpg" />
 				</section>
 
 				<section>
-					<p class="slide-title">Rewriting</p>
-					<!-- TODO: such screenshots of code -->
+					<img src="img/old-code.jpg" />
 					<!--
 * describe legacy app: code
 * only dev during campaign, so no feature race
 * no spec -->
+				</section>
+
+				<section>
+					<p class="slide-title">Identifying Use Cases</p>
+					<img src="img/old-fun-code-diagram.jpg" />
 				</section>
 
 				<section>
@@ -82,19 +85,19 @@
 					<img src="img/CleanArchitecture.jpg" />
 				</section>
 
-
-
 				<!-- TODO: such CA diagrams -->
 
 				<section>
-					<p class="slide-title">Identifying Use Cases</p>
-					<img src="img/old-fun-code-diagram.jpg" />
+					<table>
+						<tr>
+							<td><img src="img/use-case-list.jpg" /></td>
+							<td class="fragment"><img src="img/use-case-directory.jpg" style="vertical-align: 210px" /></td>
+						</tr>
+					</table>
+
 				</section>
 
-				<section>
-					<p class="slide-title">The new system</p>
-					<!-- TODO: screenshots of new app before reorganization -->
-				</section>
+				<!-- TODO: screenshots of new app before reorganization -->
 
 				<section>
 					<p class="slide-title">Flow of control</p>
@@ -162,9 +165,12 @@ $app->get(
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+				controls: false,
+				progress: false,
 
-				width: 1100,
+				width: 960,
 				height: 700,
+				margin: 0.1,
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
