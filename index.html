@@ -75,7 +75,12 @@
 				</section>
 
 				<section>
-					<img src="img/CleanArchitecture.jpg" />
+					<table>
+						<tr>
+							<td><img src="img/uncle-bob.jpg" height="300px" style="border-color: transparent" /></td>
+							<td><img src="img/CleanArchitecture.jpg" height="300px" /></td>
+						</tr>
+					</table>
 				</section>
 
 				<section>
@@ -91,7 +96,54 @@
 					<img src="img/CleanArchitecture.jpg" />
 				</section>
 
-				<!-- TODO: such CA diagrams -->
+				<section>
+					<img src="img/TheBoundary.jpg" height="600" />
+				</section>
+
+				<section>
+					<img src="img/EntityDatabase.jpg" height="600" />
+				</section>
+
+				<section>
+					<pre style="font-size: x-large"><code class="PHP">
+class CancelDonationUseCase {
+    private /* DonationRepository */ $repository;
+    private /* Mailer */ $mailer;
+
+    function cancelDonation( CancelDonationRequest $r ): CancelDonationResponse {
+        $this->validateRequest( $r );
+
+        $donation = $this->repository->getDonationById( $r->getDonationId() );
+        $donation->cancel();
+        $this->repository->storeDonation( $donation );
+
+        $this->sendConfirmationEmail( $donation );
+
+        return new CancelDonationResponse( /* ... */ );
+    }
+}
+                            </code></pre>
+				</section>
+
+				<section>
+					<pre style="font-size: x-large"><code class="PHP">
+$app->post(
+    '/cancel-donation',
+    function( Request $httpRequest ) use ( $factory ) {
+        $requestModel = new CancelDonationRequest(
+            $httpRequest->request->get( 'donation_id' ),
+            $httpRequest->request->get( 'update_token' )
+        );
+
+        $useCase = $factory->newCancelDonationUseCase();
+        $responseModel = $useCase->cancelDonation( $requestModel );
+
+        $presenter = $factory->newNukeLaunchingResultPresenter();
+        return new Response( $presenter->present( $responseModel ) );
+    }
+);
+                            </code></pre>
+				</section>
 
 				<section>
 					<table>
@@ -100,30 +152,6 @@
 							<td class="fragment"><img src="img/use-case-directory.jpg" style="vertical-align: 210px" /></td>
 						</tr>
 					</table>
-
-				</section>
-
-				<!-- TODO: screenshots of new app before reorganization -->
-
-				<section>
-					<p class="slide-title">Flow of control</p>
-
-					<pre style="font-size: x-large"><code class="PHP">
-$app->get(
-    '/launch-nukes',
-    function( Request $httpRequest ) use ( $factory ) {
-        $request = new LaunchNukesRequest(
-            $httpRequest->query->get( 'password' ),
-            $httpRequest->query->get( 'number' )
-        );
-
-        $r = $factory->newLaunchNukesUseCase()->launchNukes( $request );
-        return new Response(
-            $factory->newNukeLaunchingResultPresenter()->present( $r )
-        );
-    }
-);
-                            </code></pre>
 				</section>
 
 				<section>
@@ -146,33 +174,87 @@ $app->get(
 				</section>
 
 				<section>
-					<p class="slide-title">Bounded Contexts</p>
-					<!-- TODO: PersonalInfo -> Donor & Applicant -->
-					<!-- TODO: Separation using directories -->
-					<!-- TODO: new visualization -->
+					<pre style="font-size: x-large"><code class="PHP">
+class Donation {
+    private /* int|null */            $id
+    private /* PersonalInfo|null */   $personalInfo
+    /* ... */
+}
+					</code></pre>
+
+					<pre style="font-size: x-large" class="fragment"><code class="PHP">
+class PersonalInfo {
+    private /* PersonName */          $name
+    private /* PhysicalAddress */     $address
+    private /* string */              $emailAddress
+}
+					</code></pre>
+
+					<pre style="font-size: x-large" class="fragment"><code class="PHP">
+class MembershipApplication {
+    private /* int|null */            $id
+    private /* PersonalInfo|null */   $personalInfo
+    /* ... */
+}
+					</code></pre>
 				</section>
+
+				<section>
+					<pre style="font-size: x-large"><code class="PHP">
+class Donor {
+    private /* PersonName */          $name
+    private /* PhysicalAddress */     $address
+    private /* string */              $emailAddress
+}
+					</code></pre>
+
+					<pre style="font-size: x-large"><code class="PHP">
+class Applicant {
+    private /* PersonName */          $name
+    private /* PhysicalAddress */     $address
+    private /* EmailAddress */        $email
+    private /* PhoneNumber */         $phone
+    private /* DateTime|null */       $dateOfBirth
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<p class="slide-title">Bounded Contexts</p>
+				</section>
+
+				<!-- TODO: Separation using directories -->
+				<!-- TODO: new visualization -->
 
 				<section data-background="img/cat-questions.jpg" data-transition="linear" data-background-transition="slide">
 					<p class="shadow" style="font-size: 70px">Questions?</p>
 				</section>
 
-				<section data-state="blackout">
-					<h3 class="shadow"><span class="shadow">Links</span></h3>
-					<p><a href="https://entropywins.wtf/slides/fun-architecture/">entropywins.wtf/slides/fun-architecture</a></p>
-					<p><a href="https://github.com/wmde/FundraisingFrontend">The Fundraising Frontend application source</a></p>
-					<p><a href="https://spenden.wikimedia.de/">The Fundraising Frontend application</a></p>
-					<p><a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture (blog by Robert C Martin)</a></p>
+				<section>
+					<h3><span class="shadow">This presentation</span></h3>
+
+					<p class="shadow"><a href="https://entropywins.wtf/slides/fun-architecture/">URL: entropywins.wtf/slides/fun-architecture</a></p>
+					<p class="shadow"><a href="https://github.com/wmde/FundraisingFrontend">The Fundraising Frontend application source</a></p>
+					<p class="shadow"><a href="https://spenden.wikimedia.de/">The Fundraising Frontend application</a></p>
+
+					<h3><span class="shadow">Recommended material</span></h3>
+
+					<p class="shadow"><a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture <small>(blog by Robert C Martin)</small></a></p>
+					<p class="shadow"><a href="https://cleancoders.com/videos#clean-code-episode-7">Architecture, Use Cases, and High Level Design <small>(Clean Coders video)</small></a></p>
 				</section>
 
 				<section data-background="img/cattribution.jpg">
-					<h3 class="shadow"><span class="shadow">Cattribution</span></h3>
-					<p class="shadow">"<a href="https://www.flickr.com/photos/rockbandit/9052784451/">IvoryTower.jpg</a>" by Dave Schumaker, CC BY-NC 2.0</p>
-					<p class="shadow">"<a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a>" by Robert C Martin</p>
-					<p class="shadow">"<a href="http://geekswithblogs.net/cyoung/archive/2014/12/20/hexagonal-architecturendashthe-great-reconciler.aspx">Hexagonal Architecture</a>" by Charles Young</p>
-					<p class="shadow">"<a href="https://www.infoq.com/news/2014/10/ddd-onion-architecture">Onion Architecture</a>" by Jan Stenberg</p>
-					<p class="shadow">"Questions cat" by Linda Tanner, CC BY 2.0</p>
-					<p class="shadow">"Attribution cats" by Florencia Lewis, CC BY 2.0</p>
-					<p class="shadow">The <a href="">slides</a> by Jeroen De Dauw, CC BY-SA 3.0</p>
+					<h3><span class="shadow">Cattribution</span></h3>
+					<ul>
+						<li class="shadow">"<a href="https://www.flickr.com/photos/rockbandit/9052784451/">IvoryTower.jpg</a>" by Dave Schumaker, CC BY-NC 2.0</li>
+						<li class="shadow">"<a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a>" by Robert C Martin</li>
+						<li class="shadow">"<a href="http://geekswithblogs.net/cyoung/archive/2014/12/20/hexagonal-architecturendashthe-great-reconciler.aspx">Hexagonal Architecture</a>" by Charles Young</li>
+						<li class="shadow">"<a href="https://www.infoq.com/news/2014/10/ddd-onion-architecture">Onion Architecture</a>" by Jan Stenberg</li>
+						<li class="shadow">"Clean Architecture diagrams" by Robert C Martin</li>
+						<li class="shadow">"Questions cat" by Linda Tanner, CC BY 2.0</li>
+						<li class="shadow">"Attribution cats" by Florencia Lewis, CC BY 2.0</li>
+						<li class="shadow">The <a href="">slides</a> by Jeroen De Dauw, CC BY-SA 3.0</li>
+					</ul>
 				</section>
 			</div>
 		</div>
