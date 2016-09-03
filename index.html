@@ -53,11 +53,25 @@
 
 
 				<section data-background="img/fun-form.jpg">
+					<aside class="notes">
+						<p>Donations, membership requests</p>
+						<p>Multiple payment methods, service interaction</p>
+						<p>Commenting, comment view in html/json</p>
+						<p>Stores data accessed by analysis app</p>
+					</aside>
 				</section>
 
 				<section data-background="img/old-code.jpg">
+					<aside class="notes">
+						<p>Grown over years</p>
+						<p>Procedural base, no design</p>
+						<p>Very high complexity and coupling</p>
+						<p>No tests</p>
+						<p>Unused (code), broken code, mysterious things</p>
+						<p>Some newer parts</p>
+						<p>Slow development speed</p>
+					</aside>
 					<!-- TODO
-* describe legacy app: code
 * only dev during campaign, so no feature race
 * no spec -->
 				</section>
@@ -68,10 +82,23 @@
 						[...] rewrite the code from scratch.
 					</blockquote>
 					<p><a href="http://www.joelonsoftware.com/articles/fog0000000069.html">-- Joel Spolsky</a></p>
+
+					<aside class="notes">
+						<p>Dev only during campaign</p>
+						<p>No paralel development</p>
+						<p>Pure rewrite: no new features</p>
+						<p>Only this app</p>
+					</aside>
 				</section>
 
 				<section data-background="img/wall2.jpg">
 					<img src="img/old-fun-code-diagram.jpg" />
+
+					<aside class="notes">
+						<p>No spec</p>
+						<p>What can we reuse?</p>
+						<p>Which actions does the system need to support</p>
+					</aside>
 				</section>
 
 				<section>
@@ -93,24 +120,47 @@
 				</section>
 
 				<section>
-					<img src="img/CleanArchitecture.jpg" />
+					<img src="img/CleanArchitecture.jpg" class="fragment" />
+					<aside class="notes">
+						<p>Separation of concerns</p>
+						<p>Independent of FWs</p>
+						<p>Independent of UI and DB</p>
+						<p>Testable</p>
+						<p>Easy to understand / work with</p>
+
+						<p><br />High level / policies inside, mechanisms outside</p>
+						<p>Dependencies can only point inwards</p>
+						<p>Entities as in DDD</p>
+						<p>UC: system action, domain API / boundary</p>
+					</aside>
 				</section>
 
 				<section>
-					<img src="img/TheBoundary.jpg" height="600" />
+					<img src="img/Architecture.jpg" height="560" />
+					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
+					<aside class="notes">
+						<p>Interactor = UC</p>
+					</aside>
 				</section>
 
 				<section>
-					<img src="img/EntityDatabase.jpg" height="600" />
+					<img src="img/EntityDatabase.jpg" height="560" />
+					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
+					<aside class="notes">
+						<p>Interactrs with domain objects/services</p>
+						<p>Services/repos interfaces part of domain</p>
+						<p>DB API = Doctrine</p>
+						<p>Implementation = DoctrineDonationRepository</p>
+					</aside>
 				</section>
 
 				<section>
-					<pre style="font-size: x-large"><code class="PHP">
+					<pre style="font-size: large"><code class="PHP">
 class CancelDonationUseCase {
     private /* DonationRepository */ $repository;
     private /* Mailer */ $mailer;
 
-    function cancelDonation( CancelDonationRequest $r ): CancelDonationResponse {
+    public function cancelDonation( CancelDonationRequest $r ): CancelDonationResponse {
         $this->validateRequest( $r );
 
         $donation = $this->repository->getDonationById( $r->getDonationId() );
@@ -122,14 +172,27 @@ class CancelDonationUseCase {
         return new CancelDonationResponse( /* ... */ );
     }
 }
-                            </code></pre>
+					</code></pre>
+
+					<aside class="notes">
+						<p>Request can't contain any presentation</p>
+					</aside>
 				</section>
 
 				<section>
-					<pre style="font-size: x-large"><code class="PHP">
+					<img src="img/TheBoundary.jpg" height="560" />
+					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
+					<aside class="notes">
+						<p>Deviation: presenter not injected</p>
+						<p>No explicit UC interface</p>
+					</aside>
+				</section>
+
+				<section>
+					<pre style="font-size: large"><code class="PHP">
 $app->post(
     '/cancel-donation',
-    function( Request $httpRequest ) use ( $factory ) {
+    public function( Request $httpRequest ) use ( $factory ) {
         $requestModel = new CancelDonationRequest(
             $httpRequest->request->get( 'donation_id' ),
             $httpRequest->request->get( 'update_token' )
@@ -142,7 +205,12 @@ $app->post(
         return new Response( $presenter->present( $responseModel ) );
     }
 );
-                            </code></pre>
+					</code></pre>
+
+					<aside class="notes">
+						<p>Silex HTTP post route</p>
+						<p>Own factory, does not matter</p>
+					</aside>
 				</section>
 
 				<section>
@@ -152,6 +220,13 @@ $app->post(
 							<td class="fragment"><img src="img/use-case-directory.jpg" style="vertical-align: 210px" /></td>
 						</tr>
 					</table>
+
+					<aside class="notes">
+						<p>Easy to tell what the system does</p>
+						<p>src/ fully independent of framework</p>
+						<p>UseCases/ app logic: no presentation/db</p>
+						<p>Domain/ domain: no presentation/db</p>
+					</aside>
 				</section>
 
 				<section>
@@ -163,6 +238,9 @@ $app->post(
 							<td><img src="img/app-folder.jpg" /></td>
 						</tr>
 					</table>
+					<aside class="notes">
+						<p>All framework code</p>
+					</aside>
 				</section>
 
 				<section>
