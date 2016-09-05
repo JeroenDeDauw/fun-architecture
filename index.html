@@ -71,9 +71,6 @@
 						<p>Some newer parts</p>
 						<p>Slow development speed</p>
 					</aside>
-					<!-- TODO
-* only dev during campaign, so no feature race
-* no spec -->
 				</section>
 
 				<section>
@@ -147,7 +144,7 @@
 					<img src="img/EntityDatabase.jpg" height="560" />
 					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
 					<aside class="notes">
-						<p>Interactrs with domain objects/services</p>
+						<p>Interacts with domain objects/services</p>
 						<p>Services/repos interfaces part of domain</p>
 						<p>DB API = Doctrine</p>
 						<p>Implementation = DoctrineDonationRepository</p>
@@ -244,11 +241,89 @@ $app->post(
 				</section>
 
 				<section>
-					<p class="slide-title">Lessons learned</p>
+					<h3><span class="shadow">Lessons learned</span></h3>
+					<br />
+					<p class="slide-title">Validation & Use Case boundary</p>
+					<aside class="notes">
+						<p>Where to validate?</p>
+						<p>Policy validation in UC</p>
+					</aside>
 				</section>
 
 				<section>
-					<p class="slide-title">Validation</p>
+					<table width="100%">
+						<tr>
+							<td>
+								<pre style="font-size: large"><code class="PHP">
+class Domain\Donor {
+    private /* PersonName */          $name
+    private /* PhysicalAddress */     $address
+    private /* string */              $emailAddress
+}
+					</code></pre>
+
+								<pre style="font-size: large" class="fragment"><code class="PHP">
+class Domain\Donation {
+    private /* Donor|null */          $donor
+    /* ... */
+}					</code></pre>
+
+								<pre style="font-size: large" class="fragment"><code class="PHP">
+class UseCases\AddDonation\AddDonationRequest {
+    private /* Donor|null */          $donor
+    /* ... */
+}
+					</code></pre>
+							</td>
+
+							<td style="vertical-align: middle;" class="fragment">
+								<img src="img/ca-circles.jpg" style="border: 0; background: none; width: 250px; vertical-align: middle;" />
+							</td>
+						</tr>
+					</table>
+
+
+					<aside class="notes">
+						<p>Domain accessed directly</p>
+						<p>UC validation: RM invalid: domain invalid</p>
+					</aside>
+				</section>
+
+				<section>
+					<pre style="font-size: large"><code class="PHP">
+class AddDonationUseCase {
+    public function addDonation( AddDonationRequest $request ) {
+        $donation = $this->newDonationFromRequest( $request );
+
+        $validationResult = $this->validator->validateDonation( $donation );
+
+        // ...
+    }
+
+}
+					</code></pre>
+
+					<pre style="font-size: large" class="fragment"><code class="PHP">
+class AddDonationUseCase {
+    public function addDonation( AddDonationRequest $request ) {
+        $validationResult = $this->validateRequest( $request );
+
+        // ...
+
+        $donation = $this->newDonationFromRequest( $request );
+
+        // ...
+    }
+
+}
+					</code></pre>
+
+					<aside class="notes">
+						<p>Domain can contain basic safeguards</p>
+						<p>Required fields, amount > 0</p>
+						<p>Validation now UC/app specific</p>
+						<p>No presentation validation, inc i18n</p>
+					</aside>
 				</section>
 
 				<section>
@@ -298,11 +373,9 @@ class Applicant {
 				</section>
 
 				<section>
-					<p class="slide-title">Bounded Contexts</p>
+					<img src="img/contexts-directory.jpg" />
+					<!-- TODO: new visualization -->
 				</section>
-
-				<!-- TODO: Separation using directories -->
-				<!-- TODO: new visualization -->
 
 				<section data-background="img/cat-questions.jpg" data-transition="linear" data-background-transition="slide">
 					<p class="shadow" style="font-size: 70px">Questions?</p>
