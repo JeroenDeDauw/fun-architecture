@@ -25,6 +25,3 @@ language agnostic, and can therefore easily be applied in other OOP languages.
 * Flow of control
 * Lessons learned
 * Bounded Contexts
-
-
-You can view [the slides](https://entropywins.wtf/slides/fun-architecture).
