@@ -131,14 +131,30 @@
 				</section>
 
 				<section>
-					<img src="img/CleanArchitecture.jpg" class="fragment" />
+					<div class="fragment">
+						<blockquote style="width: 100%">
+							[...] the classic approach to dealing with software's esential complexity: low-dependency-architecture
+						</blockquote>
+						<p><a href="https://www.goodreads.com/book/show/6743843-leading-lean-software-development">-- Leading Lean Software Development</a></p>
+					</div>
+
 					<aside class="notes">
-						<p>Separation of concerns</p>
+						<p>Job: managing dependencies</p>
+						<p>Found quote yesterday</p>
+						<p>How to drive high-value change throughout org</p>
+
+						<p><br />Separation of concerns</p>
 						<p>Independent of FWs</p>
 						<p>Independent of UI and DB</p>
 						<p>Testable</p>
 						<p>Easy to understand / work with</p>
+					</aside>
+				</section>
 
+				<section>
+					<img src="img/CleanArchitecture.jpg" class="fragment" />
+
+					<aside class="notes">
 						<p><br />High level / policies inside, mechanisms outside</p>
 						<p>Dependencies can only point inwards</p>
 						<p>Entities as in DDD</p>
@@ -350,6 +366,14 @@ class AddDonationUseCase {
 					</aside>
 				</section>
 
+				<section data-background="img/cat/different.jpg">
+					<br /><br /><br /><br /><br />
+					<blockquote style="width: 100%" class="shadow">
+						Duplication is far cheaper than the wrong abstraction
+					</blockquote>
+					<p class="shadow"><a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">-- Sandi Metz</a></p>
+				</section>
+
 				<section>
 					<pre style="font-size: x-large"><code class="PHP">
 class Donation {
@@ -375,8 +399,6 @@ class MembershipApplication {
 }
 					</code></pre>
 				</section>
-
-				<section data-background="img/cat/different.jpg"></section>
 
 				<section>
 					<pre style="font-size: x-large"><code class="PHP">
