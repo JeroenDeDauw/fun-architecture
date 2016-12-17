@@ -100,6 +100,20 @@
 					</aside>
 				</section>
 
+				<section>
+					<img src="img/fun-complexity.png" />
+
+					<aside class="notes">
+						<p>Size: cyclomatic complexity</p>
+						<p>Color: Maintainability Index</p>
+						<p>Relative scaling - max 266 vs 30</p>
+					</aside>
+				</section>
+
+				<section>
+					<img src="img/lloc-per-global.png" />
+				</section>
+
 				<section data-background="img/wall2.jpg">
 					<img src="img/old-fun-code-diagram.jpg" />
 
@@ -295,18 +309,20 @@ $app->post(
 						<tr>
 							<td>
 								<pre style="font-size: large"><code class="PHP">
+class Domain\Donation {
+    private /* int|null */            $id
+    private /* Donor|null */          $donor
+    private /* DonationPayment */     $payment
+    /* ... */
+}					</code></pre>
+
+								<pre style="font-size: large" class="fragment"><code class="PHP">
 class Domain\Donor {
     private /* PersonName */          $name
     private /* PhysicalAddress */     $address
     private /* string */              $emailAddress
 }
 					</code></pre>
-
-								<pre style="font-size: large" class="fragment"><code class="PHP">
-class Domain\Donation {
-    private /* Donor|null */          $donor
-    /* ... */
-}					</code></pre>
 
 								<pre style="font-size: large" class="fragment"><code class="PHP">
 class UseCases\AddDonation\AddDonationRequest {
@@ -366,14 +382,6 @@ class AddDonationUseCase {
 					</aside>
 				</section>
 
-				<section data-background="img/cat/different.jpg">
-					<br /><br /><br /><br /><br />
-					<blockquote style="width: 100%" class="shadow">
-						Duplication is far cheaper than the wrong abstraction
-					</blockquote>
-					<p class="shadow"><a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">-- Sandi Metz</a></p>
-				</section>
-
 				<section>
 					<pre style="font-size: x-large"><code class="PHP">
 class Donation {
@@ -418,6 +426,14 @@ class Applicant {
     private /* DateTime|null */       $dateOfBirth
 }
 					</code></pre>
+				</section>
+
+				<section data-background="img/cat/different.jpg">
+					<br /><br /><br /><br /><br />
+					<blockquote style="width: 100%" class="shadow">
+						Duplication is far cheaper than the wrong abstraction
+					</blockquote>
+					<p class="shadow"><a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">-- Sandi Metz</a></p>
 				</section>
 
 				<section>
