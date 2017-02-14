@@ -233,7 +233,7 @@ class CancelDonationUseCase {
 					<pre style="font-size: large"><code class="PHP">
 $app->post(
     '/cancel-donation',
-    public function( Request $httpRequest ) use ( $factory ) {
+    function( Request $httpRequest ) use ( $factory ) {
         $requestModel = new CancelDonationRequest(
             $httpRequest->request->get( 'donation_id' ),
             $httpRequest->request->get( 'update_token' )
