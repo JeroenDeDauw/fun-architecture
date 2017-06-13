@@ -313,22 +313,23 @@ $app->post(
 								<pre style="font-size: large"><code class="PHP">
 class Domain\Donation {
     private /* int|null */            $id
-    private /* Donor|null */          $donor
     private /* DonationPayment */     $payment
+    private /* DonationComment */     $comment
     /* ... */
 }					</code></pre>
 
 								<pre style="font-size: large" class="fragment"><code class="PHP">
-class Domain\Donor {
-    private /* PersonName */          $name
-    private /* PhysicalAddress */     $address
-    private /* string */              $emailAddress
+class Domain\DonationPayment {
+    private /* Euro */                $amount
+    private /* int */                 $intervalInMonths
+    private /* PaymentMethod */       $paymentMethod
 }
 					</code></pre>
 
 								<pre style="font-size: large" class="fragment"><code class="PHP">
 class UseCases\AddDonation\AddDonationRequest {
-    private /* Donor|null */          $donor
+    private /* DonationPayment */     $payment
+    private /* DonationComment */     $comment
     /* ... */
 }
 					</code></pre>
@@ -408,6 +409,35 @@ class MembershipApplication {
     /* ... */
 }
 					</code></pre>
+				</section>
+
+				<section>
+					<pre style="font-size: x-large"><code class="PHP">
+class PersonalInfo {
+    private /* PersonName */           $name
+    private /* PhysicalAddress */      $address
+    private /* string */               $emailAddress
+    private /* PhoneNumber|null */     $phone
+    private /* DateTime|null */        $dateOfBirth
+					</code></pre>
+
+					<pre style="font-size: x-large" class="fragment"><code class="PHP">
+    private /* int|null */             $membershipNumber
+    private /* PhysicalAddress|null */ $shippingAddress
+    private /* string|null */          $shirtSize
+					</code></pre>
+
+					<pre style="font-size: x-large" class="fragment"><code class="PHP">
+    private /* string */               $type
+					</code></pre>
+
+					<aside class="notes">
+						<p>Nullable fields</p>
+						<p>More contexts make it worse</p>
+						<p>Fields can become nullable</p>
+						<p>Meaning becomes unclear</p>
+						<p>Need to deal with all: code and understand</p>
+					</aside>
 				</section>
 
 				<section>
