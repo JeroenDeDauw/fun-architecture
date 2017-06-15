@@ -53,9 +53,6 @@
 					<aside class="notes">
 						<p>Welcome</p>
 						<p>I am Jeroen dev at WMDE</p>
-						<p>Last year we did project</p>
-						<p>Articles but no real wrld examples</p>
-						<p>Story of inexperienced team</p>
 					</aside>
 				</section>
 
@@ -63,6 +60,10 @@
 					<h3><span class="shadow">We are hiring!</span></h3>
 
 					<p class="shadow"><a href="https://software.wikimedia.de/">software.wikimedia.de</a></p>
+
+					<img src="img/WMDE_Logo_vertikal_white.svg" width="300px" style="background: transparent; border: none" />
+					<br />
+					<img src="img/omgcat.png" width="100px" style="background: transparent; border: none" />
 				</section>
 
 				<section data-background="img/IvoryTower.jpg" data-transition="linear">
@@ -87,12 +88,14 @@
 					<p style="text-align: right; font-size: small">IvoryTower.jpg</p>
 
 					<aside class="notes">
-						<p>Welcome</p>
-						<p>I am Jeroen dev at WMDE</p>
 						<p>Last year we did project</p>
 						<p>Articles but no real wrld examples</p>
 						<p>Story of inexperienced team</p>
 					</aside>
+				</section>
+
+				<section>
+					<img src="img/banner.png" />
 				</section>
 
 				<section data-background="img/fun-form.jpg">
@@ -170,6 +173,11 @@
 							<td><img src="img/CleanArchitecture.jpg" height="300px" /></td>
 						</tr>
 					</table>
+
+					<aside class="notes">
+						<p>Looked at Unclebob videos</p>
+						<p>Event Sourcing not possible</p>
+					</aside>
 				</section>
 
 				<section>
@@ -195,10 +203,8 @@
 						<p>How to drive high-value change throughout org</p>
 
 						<p><br />Separation of concerns</p>
-						<p>Independent of FWs</p>
-						<p>Independent of UI and DB</p>
-						<p>Testable</p>
-						<p>Easy to understand / work with</p>
+						<p>Independent of FWs, UI and DB</p>
+						<p>Testable, understand, work with</p>
 					</aside>
 				</section>
 
@@ -208,7 +214,6 @@
 					<aside class="notes">
 						<p><br />High level / policies inside, mechanisms outside</p>
 						<p>Dependencies can only point inwards</p>
-						<p>Entities as in DDD</p>
 						<p>UC: system action, domain API / boundary</p>
 					</aside>
 				</section>
@@ -217,6 +222,11 @@
 					<img src="img/Architecture.jpg" height="560" />
 					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
 					<aside class="notes">
+						<p>Boundaries</p>
+						<p>Domain model + UC = inner 2 circles</p>
+						<p>Flow of control: CancelDonationUseCase</p>
+						<p>Models on inside of boundary</p>
+						<p>All arrows inwards</p>
 						<p>Interactor = UC</p>
 					</aside>
 				</section>
@@ -227,8 +237,8 @@
 					<aside class="notes">
 						<p>Interacts with domain objects/services</p>
 						<p>Services/repos interfaces part of domain</p>
-						<p>DB API = Doctrine</p>
-						<p>Implementation = DoctrineDonationRepository</p>
+						<p>DB API = MySQL</p>
+						<p>Implementation = MySQLDonationRepository</p>
 					</aside>
 				</section>
 
@@ -257,8 +267,35 @@ class CancelDonationUseCase {
 					</aside>
 				</section>
 
-				<section>
+				<section data-transition="fade">
 					<img src="img/TheBoundary.jpg" height="560" />
+					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
+					<aside class="notes">
+						<p>Deviation: presenter not injected</p>
+						<p>No explicit UC interface</p>
+					</aside>
+				</section>
+
+				<section data-transition="none">
+					<img src="img/TheBoundary2.jpg" height="560" />
+					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
+					<aside class="notes">
+						<p>Deviation: presenter not injected</p>
+						<p>No explicit UC interface</p>
+					</aside>
+				</section>
+
+				<section data-transition="none">
+					<img src="img/TheBoundary3.jpg" height="560" />
+					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
+					<aside class="notes">
+						<p>Deviation: presenter not injected</p>
+						<p>No explicit UC interface</p>
+					</aside>
+				</section>
+
+				<section data-transition="none">
+					<img src="img/TheBoundary4.jpg" height="560" />
 					<p style="font-size: medium">Source: <a href="https://cleancoders.com/videos#clean-code-episode-7">CleanCoders.com</a></p>
 					<aside class="notes">
 						<p>Deviation: presenter not injected</p>
@@ -308,20 +345,6 @@ $app->post(
 				</section>
 
 				<section data-background-video="img/cat/all-kittens-responding-nominally.webm"></section>
-
-				<section>
-					<table>
-						<tr style="color: transparent">
-							<td><img src="img/web-folder.jpg" /></td>
-						</tr>
-						<tr class="fragment">
-							<td><img src="img/app-folder.jpg" /></td>
-						</tr>
-					</table>
-					<aside class="notes">
-						<p>All framework code</p>
-					</aside>
-				</section>
 
 				<section data-background="img/cat/lookingup.jpg">
 					<h3><span class="shadow">Lessons learned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h3>
@@ -420,6 +443,24 @@ class AddDonationUseCase {
 					</aside>
 				</section>
 
+				<section data-background="img/cat/lookingup.jpg">
+					<h3><span class="shadow">Lessons learned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h3>
+					<p class="slide-title">Bounded Contexts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+					<!-- Simplicity of design, even in HTML! Hire me now for just 22 million bitcoins! -->
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<aside class="notes">
+						<p>Where to validate?</p>
+						<p>Policy validation in UC</p>
+					</aside>
+				</section>
+
 				<section>
 					<pre style="font-size: x-large"><code class="PHP">
 class Donation {
@@ -462,10 +503,6 @@ class PersonalInfo {
     private /* string|null */          $shirtSize
 					</code></pre>
 
-					<pre style="font-size: x-large" class="fragment"><code class="PHP">
-    private /* string */               $type
-					</code></pre>
-
 					<aside class="notes">
 						<p>Nullable fields</p>
 						<p>More contexts make it worse</p>
@@ -501,6 +538,26 @@ class Applicant {
 						Duplication is far cheaper than the wrong abstraction
 					</blockquote>
 					<p class="shadow"><a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction">-- Sandi Metz</a></p>
+				</section>
+
+				<section>
+					<pre style="font-size: x-large"><code class="PHP">
+class Donor {
+    private /* PersonName */          $name
+    private /* PhysicalAddress */     $address
+    private /* string */              $emailAddress
+}
+					</code></pre>
+
+					<pre style="font-size: x-large"><code class="PHP">
+class Applicant {
+    private /* PersonName */          $name
+    private /* PhysicalAddress */     $address
+    private /* EmailAddress */        $email
+    private /* PhoneNumber */         $phone
+    private /* DateTime|null */       $dateOfBirth
+}
+					</code></pre>
 				</section>
 
 				<section>
@@ -550,6 +607,13 @@ class Applicant {
 					</div>
 				</section>
 
+				<section data-background="img/cat/interested.jpg" data-transition="fade">
+					<h3><span class="shadow">Recommended material</span></h3>
+
+					<p class="shadow"><a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture <small>(blog by Robert C Martin)</small></a></p>
+					<p class="shadow"><a href="https://cleancoders.com/videos#clean-code-episode-7">Architecture, Use Cases, and High Level Design <small>(CleanCoders.com video)</small></a></p>
+				</section>
+
 				<section data-background="img/cattribution.jpg" data-transition="fade">
 					<h3><span class="shadow">Cattribution</span></h3>
 					<ul style="font-size: 28px">
@@ -573,13 +637,6 @@ class Applicant {
 				
 				<section data-background="img/cat-questions.jpg" data-transition="fade">
 					<p class="shadow" style="font-size: 70px">Questions?</p>
-				</section>
-
-				<section data-background="img/cat/interested.jpg" data-transition="fade">
-					<h3><span class="shadow">Recommended material</span></h3>
-
-					<p class="shadow"><a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture <small>(blog by Robert C Martin)</small></a></p>
-					<p class="shadow"><a href="https://cleancoders.com/videos#clean-code-episode-7">Architecture, Use Cases, and High Level Design <small>(Clean Coders video)</small></a></p>
 				</section>
 			</div>
 		</div>
