@@ -388,6 +388,32 @@ $app->post(
 				</section>
 
 				<section>
+					<ol>
+						<li class="fragment">Always wrong (donation amount < 0)</li>
+						<li class="fragment">Wrong for some usecases (donation amount > 10000)</li>
+						<li class="fragment">Wrong input format (donation amount is "0.4.2")</li>
+					</ol>
+				</section>
+
+				<section>
+					<pre style="font-size: large"><code class="PHP">
+class UseCases\AddDonation\AddDonationRequest {
+	private $donorType;
+	private $donorFirstName;
+	private $donorLastName;
+	private $donorSalutation;
+	private $donorTitle;
+	private $donorCompany;
+	private $donorStreetAddress;
+	private $donorPostalCode;
+	private $donorCity;
+	private $donorCountryCode;
+	private $donorEmailAddress;
+	/* ... */
+}					</code></pre>
+				</section>
+
+				<section>
 					<table width="100%">
 						<tr>
 							<td>
@@ -395,7 +421,7 @@ $app->post(
 class Domain\Donation {
     private /* int|null */            $id
     private /* DonationPayment */     $payment
-    private /* DonationComment */     $comment
+    private /* Donor */               $donor
     /* ... */
 }					</code></pre>
 
@@ -410,7 +436,7 @@ class Domain\DonationPayment {
 								<pre style="font-size: large" class="fragment"><code class="PHP">
 class UseCases\AddDonation\AddDonationRequest {
     private /* DonationPayment */     $payment
-    private /* DonationComment */     $comment
+    private /* Donor */               $donor
     /* ... */
 }
 					</code></pre>
