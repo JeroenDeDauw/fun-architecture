@@ -25,3 +25,7 @@ language agnostic, and can therefore easily be applied in other OOP languages.
 * Flow of control
 * Lessons learned
 * Bounded Contexts
+
+## License
+
+The slides are licensed by Jeroen De Dauw under CC BY-SA 3.0
